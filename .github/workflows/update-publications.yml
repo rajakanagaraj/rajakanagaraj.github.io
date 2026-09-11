@@ -91,6 +91,9 @@ jobs:
               data = orcid_get(url)
               page_groups = data.get("group", [])
 
+              print(f"ORCID API returned {len(page_groups)} work groups on this page.")
+              print(f"Total groups collected so far: {len(groups) + len(page_groups)}")
+
               if not page_groups:
                   break
 
