@@ -1,655 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publications | Rajapandian Kanagaraj</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications | Rajapandian Kanagaraj</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #333;
-            background: #ffffff;
-            line-height: 1.7;
-        }
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      color: #222;
+      background: #fff;
+      line-height: 1.65;
+    }
 
-        header {
-            border-bottom: 1px solid #e5e5e5;
-            padding: 22px 8%;
-            background: #ffffff;
-        }
+    header {
+      border-bottom: 1px solid #ddd;
+      padding: 22px 30px;
+    }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: auto;
-        }
+    header .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
 
-        nav .name {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #222;
-        }
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+    }
 
-        nav .links a {
-            margin-left: 24px;
-            text-decoration: none;
-            color: #555;
-            font-size: 0.95rem;
-        }
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
 
-        nav .links a:hover {
-            color: #000;
-        }
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-        main {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 70px 8%;
-        }
+    main {
+      max-width: 900px;
+      margin: 55px auto;
+      padding: 0 30px;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #222;
-        }
+    h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
 
-        .intro {
-            font-size: 1.05rem;
-            color: #555;
-            margin-bottom: 50px;
-        }
+    .intro {
+      color: #555;
+      margin-bottom: 45px;
+    }
 
-        .year {
-            font-size: 1.5rem;
-            margin-top: 55px;
-            margin-bottom: 25px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e5e5e5;
-            color: #222;
-        }
+    .year {
+      font-size: 24px;
+      margin-top: 42px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
 
-        .publication {
-            margin-bottom: 32px;
-        }
+    .publication {
+      margin: 24px 0 30px 0;
+    }
 
-        .authors {
-            margin-bottom: 5px;
-        }
+    .authors {
+      margin-bottom: 4px;
+    }
 
-        .authors strong {
-            color: #222;
-        }
+    .title {
+      font-weight: 600;
+    }
 
-        .title {
-            font-weight: bold;
-            color: #222;
-        }
+    .journal {
+      font-style: italic;
+      color: #555;
+    }
 
-        .journal {
-            font-style: italic;
-        }
+    .doi {
+      margin-top: 5px;
+      font-size: 14px;
+    }
 
-        .doi {
-            margin-top: 5px;
-            font-size: 0.92rem;
-        }
+    .doi a {
+      color: #1769aa;
+      text-decoration: none;
+    }
 
-        .doi a {
-            color: #555;
-            text-decoration: none;
-        }
+    .doi a:hover {
+      text-decoration: underline;
+    }
 
-        .doi a:hover {
-            text-decoration: underline;
-        }
+    .orcid-note {
+      margin-top: 55px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      color: #666;
+      font-size: 14px;
+    }
 
-        .orcid-note {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e5e5;
-            color: #666;
-            font-size: 0.92rem;
-        }
+    footer {
+      border-top: 1px solid #ddd;
+      margin-top: 70px;
+      padding: 25px 30px;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
 
-        .orcid-note a {
-            color: #555;
-        }
+    @media (max-width: 700px) {
+      header .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-        footer {
-            border-top: 1px solid #e5e5e5;
-            text-align: center;
-            padding: 30px 8%;
-            color: #777;
-            font-size: 0.9rem;
-        }
+      nav a {
+        margin-left: 0;
+        margin-right: 16px;
+      }
 
-        @media (max-width: 700px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+      main {
+        margin-top: 35px;
+      }
 
-            nav .links {
-                margin-top: 12px;
-            }
-
-            nav .links a {
-                margin-left: 0;
-                margin-right: 18px;
-            }
-
-            main {
-                padding-top: 45px;
-            }
-
-            h1 {
-                font-size: 2.1rem;
-            }
-        }
-    </style>
+      h2 {
+        font-size: 29px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-    <nav>
-        <div class="name">Rajapandian Kanagaraj</div>
+  <div class="header-inner">
+    <h1>Rajapandian Kanagaraj</h1>
 
-        <div class="links">
-            <a href="index.html">Home</a>
-            <a href="research.html">Research</a>
-            <a href="publications.html">Publications</a>
-            <a href="code.html">Code</a>
-            <a href="about.html">About</a>
-            <a href="cv.html">CV</a>
-        </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="code.html">Code</a>
+      <a href="about.html">About</a>
+      <a href="cv.html">CV</a>
     </nav>
+  </div>
 </header>
 
 <main>
+  <h2>Publications</h2>
 
-    <h1>Publications</h1>
+  <p class="intro">
+    Publications and research outputs retrieved from my
+    <a href="https://orcid.org/0000-0002-8562-8790">ORCID record</a>.
+  </p>
 
-    <p class="intro">
-        My research publications span biodiversity, community assembly,
-        spatial ecology, species distributions, environmental change,
-        conservation and ecological modelling.
-    </p>
+  <h3 class="year">2003</h3>
 
+  <div class="publication">
 
-    <div class="year">2026</div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Brockelman, W. Y., Wiegand, T.,
-            Nathalang, A., Yang, J., Tripathi, N. K. &amp; Chanthorn, W.
-        </div>
-
-        <div class="title">
-            Spatial Regulation of Trait–Environment Interactions Shapes Plant
-            Community Functional Patterns in a Tropical Forest
-        </div>
-
-        <div>
-            <span class="journal">Journal of Vegetation Science</span>,
-            37(4), e70169.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1111/jvs.70169" target="_blank">
-                DOI
-            </a>
-        </div>
+    <div class="authors">
+      
     </div>
 
-
-    <div class="year">2024</div>
-
-    <div class="publication">
-        <div class="authors">
-            Chanthorn, W., Wiegand, T., Nathalang, A.,
-            <strong>Kanagaraj, R.</strong>, Davies, S., Sun, Z.,
-            Tripathi, N. K., Réjou-Méchain, M. &amp; Brockelman, W. Y.
-        </div>
-
-        <div class="title">
-            Species assemblages and their drivers differ between trees and
-            lianas in a seasonal evergreen forest in Thailand
-        </div>
-
-        <div>
-            <span class="journal">Ecosphere</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1002/ecs2.4942" target="_blank">
-                DOI
-            </a>
-        </div>
+    <div class="title">
+      Saving the tiger in the extreme northwest of its range
     </div>
 
-    <div class="publication">
-        <div class="authors">
-            De, R., Sharma, R., Singh, S. K., Rasteiro, R., Bhaskar, R.,
-            Khan, I., <strong>Kanagaraj, R.</strong>, Kakati, K.,
-            Nigam, P., Williams, A. C. et al.
-        </div>
-
-        <div class="title">
-            Conservation implications of high gene flow and lack of pronounced
-            spatial genetic structure in elephants supported by contiguous
-            suitable habitat in north-western India
-        </div>
-
-        <div>
-            <span class="journal">Conservation Science and Practice</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1111/csp2.13075" target="_blank">
-                DOI
-            </a>
-        </div>
+    <div class="journal">
+      Cat News, 38:11
     </div>
 
-
-    <div class="year">2023</div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Joshi, B. D., De, R., Predit, M. A.,
-            Singh, S. K., Pandey, P., Kumar, V., Sharma, V., Kumar, M.,
-            Matura, R. et al.
-        </div>
-
-        <div class="title">
-            Predicting the impact of climate change on range and genetic
-            diversity patterns of the endangered endemic Nilgiri tahr
-            (Nilgiritragus hylocrius) in the western Ghats, India
-        </div>
-
-        <div>
-            <span class="journal">Landscape Ecology</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1007/s10980-023-01681-3" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            Ahmad, A., <strong>Kanagaraj, R.</strong> &amp; Gopi, G. V.
-        </div>
-
-        <div class="title">
-            Wildlife habitat mapping using Sentinel-2 imagery of Mehao Wildlife
-            Sanctuary, Arunachal Pradesh, India
-        </div>
-
-        <div>
-            <span class="journal">Heliyon</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1016/j.heliyon.2023.e13799" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            Kowal, V. A., Schmolke, A., <strong>Kanagaraj, R.</strong>
-            &amp; Bruggeman, D. J.
-        </div>
-
-        <div class="title">
-            Resource Selection Probability Functions for Gopher Tortoise:
-            Providing a Management Tool Applicable Across the Species’ Range
-        </div>
-
-        <div>
-            <span class="journal">Environmental Management</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1007/s00267-013-0210-x" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-
-    <div class="year">2022</div>
-
-    <div class="publication">
-        <div class="authors">
-            Reshamwala, H. S., Bhattacharya, A., Khan, S., Shrotriya, S.,
-            Lyngdoh, S. B., Goyal, S. P., <strong>Kanagaraj, R.</strong>
-            &amp; Habib, B.
-        </div>
-
-        <div class="title">
-            Modeling Potential Impacts of Climate Change on the Distribution
-            of Wooly Wolf (Canis lupus chanco)
-        </div>
-
-        <div>
-            <span class="journal">Frontiers in Ecology and Evolution</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.3389/fevo.2022.815621" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-
-    <div class="year">2021</div>
-
-    <div class="publication">
-        <div class="authors">
-            De, R., Sharma, R., Davidar, P., Arumugam, N., Sedhupathy, A.,
-            Puyravaud, J.-P., Selvan, K. M., Rahim, P. P. A.,
-            Udayraj, S., Parida, J. et al.
-        </div>
-
-        <div class="title">
-            Pan-India population genetics signifies the importance of habitat
-            connectivity for wild Asian elephant conservation
-        </div>
-
-        <div>
-            <span class="journal">Global Ecology and Conservation</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1016/j.gecco.2021.e01888" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            Dejene, S. W., Mpakairi, K. S., <strong>Kanagaraj, R.</strong>,
-            Wato, Y. A. &amp; Mengistu, S.
-        </div>
-
-        <div class="title">
-            Modelling continental range shift of the African elephant
-            (Loxodonta africana) under a changing climate and land cover:
-            implications for future conservation of the species
-        </div>
-
-        <div>
-            <span class="journal">African Zoology</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1080/15627020.2020.1846617" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-
-    <div class="year">2019</div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Araújo, M. B., Barman, R.,
-            Davidar, P., De, R., Digal, D. K., Gopi, G. V., Johnsingh, A. J. T.,
-            Kakati, K., Kramer-Schadt, S. et al.
-        </div>
-
-        <div class="title">
-            Predicting range shifts of Asian elephants under global change
-        </div>
-
-        <div>
-            <span class="journal">Diversity and Distributions</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1111/ddi.12898" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-
-    <div class="year">2013</div>
-
-    <div class="publication">
-        <div class="authors">
-            Punchi-Manage, R., Getzin, S., Wiegand, T.,
-            <strong>Kanagaraj, R.</strong>, Gunatilleke, C. V. S.,
-            Gunatilleke, I. A. U. N., Wiegand, K. &amp; Huth, A.
-        </div>
-
-        <div class="title">
-            Effects of topography on structuring local species assemblages in a
-            Sri Lankan mixed dipterocarp forest
-        </div>
-
-        <div>
-            <span class="journal">Journal of Ecology</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1111/1365-2745.12017" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            Mundo, I. A., Wiegand, T., <strong>Kanagaraj, R.</strong>
-            &amp; Kitzberger, T.
-        </div>
-
-        <div class="title">
-            Environmental drivers and spatial dependency in wildfire ignition
-            patterns of northwestern Patagonia
-        </div>
-
-        <div>
-            <span class="journal">Journal of Environmental Management</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1016/j.jenvman.2013.03.011" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Wiegand, T., Mohamed, A.
-            &amp; Kramer-Schadt, S.
-        </div>
-
-        <div class="title">
-            MODELLING SPECIES DISTRIBUTIONS TO MAP THE ROAD TOWARDS
-            CARNIVORE CONSERVATION IN THE TROPICS
-        </div>
-
-        <div>
-            <span class="journal">Raffles Bulletin of Zoology</span>.
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            De Angelo, C., Paviolo, A., Wiegand, T.,
-            <strong>Kanagaraj, R.</strong> &amp; Di Bitetti, M. S.
-        </div>
-
-        <div class="title">
-            Understanding species persistence for defining conservation actions:
-            A management landscape for jaguars in the Atlantic Forest
-        </div>
-
-        <div>
-            <span class="journal">Biological Conservation</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1016/j.biocon.2012.12.021" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Wiegand, T., Kramer-Schadt, S.
-            &amp; Goyal, S. P.
-        </div>
-
-        <div class="title">
-            Using individual-based movement models to assess inter-patch
-            connectivity for large carnivores in fragmented landscapes
-        </div>
-
-        <div>
-            <span class="journal">Biological Conservation</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1016/j.biocon.2013.08.030" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            Kowal, V. A., Schmolke, A., <strong>Kanagaraj, R.</strong>
-            &amp; Bruggeman, D. J.
-        </div>
-
-        <div class="title">
-            Resource Selection Probability Functions for Gopher Tortoise:
-            Providing a Management Tool Applicable Across the Species’ Range
-        </div>
-
-        <div>
-            <span class="journal">Environmental Management</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1007/s00267-013-0210-x" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-
-    <div class="year">2011</div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Wiegand, T., Kramer-Schadt, S.,
-            Anwar, M. &amp; Goyal, S. P.
-        </div>
-
-        <div class="title">
-            Assessing habitat suitability for tiger in the fragmented Terai
-            Arc Landscape of India and Nepal
-        </div>
-
-        <div>
-            <span class="journal">Ecography</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1111/j.1600-0587.2010.06482.x" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>, Wiegand, T., Comita, L. S.
-            &amp; Huth, A.
-        </div>
-
-        <div class="title">
-            Tropical tree species assemblages in topographical habitats change
-            in time and with life stage
-        </div>
-
-        <div>
-            <span class="journal">Journal of Ecology</span>.
-        </div>
-
-        <div class="doi">
-            <a href="https://doi.org/10.1111/j.1365-2745.2011.01878.x" target="_blank">
-                DOI
-            </a>
-        </div>
-    </div>
-
-
-    <div class="year">2003</div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>
-        </div>
-
-        <div class="title">
-            Saving the tiger in the extreme northwest of its range
-        </div>
-
-        <div>
-            <span class="journal">Cat News</span>, 38:11.
-        </div>
-    </div>
-
-
-    <div class="year">Other research output</div>
-
-    <div class="publication">
-        <div class="authors">
-            <strong>Kanagaraj, R.</strong>
-        </div>
-
-        <div class="title">
-            Dispersal limitation and environmental factors shape tree community
-            structure across life stages at multiple scales in tropical forests
-        </div>
-
-        <div>
-            ORCID record: Other research output.
-        </div>
-    </div>
-
-
-    <div class="orcid-note">
-        Publication record maintained through
-        <a href="https://orcid.org/0000-0002-8562-8790" target="_blank">
-            ORCID
-        </a>.
-    </div>
+  </div>
+
+  <div class="orcid-note">
+    Publication information is retrieved automatically from
+    <a href="https://orcid.org/0000-0002-8562-8790">
+      ORCID
+    </a>.
+  </div>
 
 </main>
 
 <footer>
-    © 2026 Rajapandian Kanagaraj
+  © Rajapandian Kanagaraj
 </footer>
 
 </body>
