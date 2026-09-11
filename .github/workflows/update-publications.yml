@@ -1,0 +1,527 @@
+name: Update publications from ORCID
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-publications:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Download ORCID publications
+        env:
+          ORCID_CLIENT_ID: ${{ secrets.ORCID_CLIENT_ID }}
+          ORCID_CLIENT_SECRET: ${{ secrets.ORCID_CLIENT_SECRET }}
+        run: |
+          python <<'PY'
+          import json
+          import urllib.parse
+          import urllib.request
+          from html import escape
+          from pathlib import Path
+
+          ORCID = "0000-0002-8562-8790"
+          API_BASE = "https://pub.orcid.org/v3.0"
+
+          # ------------------------------------------------------------
+          # Get a long-lived ORCID /read-public access token
+          # ------------------------------------------------------------
+
+          token_data = urllib.parse.urlencode({
+              "client_id": __import__("os").environ["ORCID_CLIENT_ID"],
+              "client_secret": __import__("os").environ["ORCID_CLIENT_SECRET"],
+              "grant_type": "client_credentials",
+              "scope": "/read-public"
+          }).encode()
+
+          token_request = urllib.request.Request(
+              "https://orcid.org/oauth/token",
+              data=token_data,
+              headers={"Accept": "application/json"},
+              method="POST"
+          )
+
+          with urllib.request.urlopen(token_request) as response:
+              token_response = json.load(response)
+
+          access_token = token_response["access_token"]
+
+          # ------------------------------------------------------------
+          # Helper for ORCID API requests
+          # ------------------------------------------------------------
+
+          def orcid_get(url):
+              request = urllib.request.Request(
+                  url,
+                  headers={
+                      "Authorization": f"Bearer {access_token}",
+                      "Accept": "application/vnd.orcid+json"
+                  }
+              )
+              with urllib.request.urlopen(request) as response:
+                  return json.load(response)
+
+          # ------------------------------------------------------------
+          # Retrieve all works from the ORCID record
+          # ------------------------------------------------------------
+
+          groups = []
+          start = 0
+          rows = 100
+
+          while True:
+              url = (
+                  f"{API_BASE}/{ORCID}/works"
+                  f"?start={start}&rows={rows}"
+              )
+
+              data = orcid_get(url)
+              page_groups = data.get("group", [])
+
+              if not page_groups:
+                  break
+
+              groups.extend(page_groups)
+
+              if len(page_groups) < rows:
+                  break
+
+              start += rows
+
+          # ------------------------------------------------------------
+          # Select the preferred version from each ORCID work group
+          # ------------------------------------------------------------
+
+          works = []
+
+          for group in groups:
+              summaries = group.get("work-summary", [])
+
+              if not summaries:
+                  continue
+
+              # ORCID uses display-index to identify the preferred
+              # version within a group.
+              preferred = max(
+                  summaries,
+                  key=lambda x: int(x.get("display-index", "0"))
+              )
+
+              put_code = preferred.get("put-code")
+
+              if put_code is None:
+                  continue
+
+              try:
+                  detail = orcid_get(
+                      f"{API_BASE}/{ORCID}/work/{put_code}"
+                  )
+              except Exception as error:
+                  print(f"Could not retrieve work {put_code}: {error}")
+                  continue
+
+              works.append(detail)
+
+          # ------------------------------------------------------------
+          # Extract publication information
+          # ------------------------------------------------------------
+
+          publications = []
+
+          for work in works:
+
+              title = (
+                  work.get("title", {})
+                      .get("title", {})
+                      .get("value", "")
+              )
+
+              if not title:
+                  continue
+
+              publication_date = work.get("publication-date") or {}
+
+              year = (
+                  publication_date
+                  .get("year", {})
+                  .get("value")
+              )
+
+              if not year:
+                  continue
+
+              journal = (
+                  work.get("journal-title", {})
+                      .get("value", "")
+              )
+
+              work_type = work.get("type", "")
+
+              # We are building a publications page, so keep journal
+              # articles and other research outputs that ORCID has
+              # placed in the works section.
+              contributors = []
+
+              contributor_data = work.get("contributors", {})
+              contributor_list = contributor_data.get("contributor", [])
+
+              for contributor in contributor_list:
+                  credit_name = (
+                      contributor
+                      .get("credit-name", {})
+                      .get("value")
+                  )
+
+                  if not credit_name:
+                      continue
+
+                  contributors.append(credit_name)
+
+              # Find DOI
+              doi = None
+
+              external_ids = (
+                  work.get("external-ids", {})
+                      .get("external-id", [])
+              )
+
+              for external_id in external_ids:
+                  if external_id.get("external-id-type", "").lower() == "doi":
+                      doi = external_id.get("external-id-value")
+                      break
+
+              work_url = None
+
+              url_data = work.get("url")
+              if isinstance(url_data, dict):
+                  work_url = url_data.get("value")
+
+              if doi:
+                  doi_url = f"https://doi.org/{doi}"
+              else:
+                  doi_url = work_url
+
+              publications.append({
+                  "year": int(year),
+                  "title": title,
+                  "journal": journal,
+                  "authors": contributors,
+                  "doi": doi,
+                  "url": doi_url,
+                  "type": work_type
+              })
+
+          # ------------------------------------------------------------
+          # Sort newest first
+          # ------------------------------------------------------------
+
+          publications.sort(
+              key=lambda x: (x["year"], x["title"].lower()),
+              reverse=True
+          )
+
+          print(f"Retrieved {len(publications)} works from ORCID.")
+
+          # ------------------------------------------------------------
+          # Generate publications.html
+          # ------------------------------------------------------------
+
+          def format_authors(authors):
+              formatted = []
+
+              for author in authors:
+                  # Match your ORCID-linked name robustly.
+                  normalized = author.lower().replace(",", " ")
+
+                  if (
+                      "rajapandian" in normalized
+                      and "kanagaraj" in normalized
+                  ):
+                      formatted.append(
+                          f"<strong>{escape(author)}</strong>"
+                      )
+                  else:
+                      formatted.append(escape(author))
+
+              return "; ".join(formatted)
+
+          years = sorted(
+              {p["year"] for p in publications},
+              reverse=True
+          )
+
+          html = """<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Publications | Rajapandian Kanagaraj</title>
+
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                             Roboto, Helvetica, Arial, sans-serif;
+                margin: 0;
+                color: #222;
+                background: #fff;
+                line-height: 1.65;
+              }
+
+              header {
+                border-bottom: 1px solid #ddd;
+                padding: 22px 30px;
+              }
+
+              header .header-inner {
+                max-width: 900px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
+              }
+
+              header h1 {
+                font-size: 20px;
+                margin: 0;
+                font-weight: 600;
+              }
+
+              nav a {
+                color: #333;
+                text-decoration: none;
+                margin-left: 20px;
+                font-size: 14px;
+              }
+
+              nav a:hover {
+                text-decoration: underline;
+              }
+
+              main {
+                max-width: 900px;
+                margin: 55px auto;
+                padding: 0 30px;
+              }
+
+              h2 {
+                font-size: 34px;
+                margin-bottom: 15px;
+              }
+
+              .intro {
+                color: #555;
+                margin-bottom: 45px;
+              }
+
+              .year {
+                font-size: 24px;
+                margin-top: 42px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #ddd;
+              }
+
+              .publication {
+                margin: 24px 0 30px 0;
+              }
+
+              .authors {
+                margin-bottom: 4px;
+              }
+
+              .title {
+                font-weight: 600;
+              }
+
+              .journal {
+                font-style: italic;
+                color: #555;
+              }
+
+              .doi {
+                margin-top: 5px;
+                font-size: 14px;
+              }
+
+              .doi a {
+                color: #1769aa;
+                text-decoration: none;
+              }
+
+              .doi a:hover {
+                text-decoration: underline;
+              }
+
+              .orcid-note {
+                margin-top: 55px;
+                padding-top: 20px;
+                border-top: 1px solid #ddd;
+                color: #666;
+                font-size: 14px;
+              }
+
+              footer {
+                border-top: 1px solid #ddd;
+                margin-top: 70px;
+                padding: 25px 30px;
+                text-align: center;
+                color: #777;
+                font-size: 13px;
+              }
+
+              @media (max-width: 700px) {
+                header .header-inner {
+                  flex-direction: column;
+                  align-items: flex-start;
+                }
+
+                nav a {
+                  margin-left: 0;
+                  margin-right: 16px;
+                }
+
+                main {
+                  margin-top: 35px;
+                }
+
+                h2 {
+                  font-size: 29px;
+                }
+              }
+            </style>
+          </head>
+
+          <body>
+
+          <header>
+            <div class="header-inner">
+              <h1>Rajapandian Kanagaraj</h1>
+
+              <nav>
+                <a href="index.html">Home</a>
+                <a href="research.html">Research</a>
+                <a href="publications.html">Publications</a>
+                <a href="code.html">Code</a>
+                <a href="about.html">About</a>
+                <a href="cv.html">CV</a>
+              </nav>
+            </div>
+          </header>
+
+          <main>
+            <h2>Publications</h2>
+
+            <p class="intro">
+              Publications and research outputs retrieved from my
+              <a href="https://orcid.org/0000-0002-8562-8790">ORCID record</a>.
+            </p>
+          """
+
+          for year in years:
+
+              html += f"""
+            <h3 class="year">{year}</h3>
+          """
+
+              for publication in [
+                  p for p in publications if p["year"] == year
+              ]:
+
+                  authors = format_authors(publication["authors"])
+
+                  title = escape(publication["title"])
+                  journal = escape(publication["journal"])
+
+                  html += f"""
+            <div class="publication">
+
+              <div class="authors">
+                {authors}
+              </div>
+
+              <div class="title">
+                {title}
+              </div>
+          """
+
+                  if journal:
+                      html += f"""
+              <div class="journal">
+                {journal}
+              </div>
+          """
+
+                  if publication["doi"] and publication["url"]:
+                      html += f"""
+              <div class="doi">
+                DOI:
+                <a href="{escape(publication["url"])}">
+                  {escape(publication["doi"])}
+                </a>
+              </div>
+          """
+                  elif publication["url"]:
+                      html += f"""
+              <div class="doi">
+                <a href="{escape(publication["url"])}">
+                  Publication link
+                </a>
+              </div>
+          """
+
+                  html += """
+            </div>
+          """
+
+          html += """
+            <div class="orcid-note">
+              Publication information is retrieved automatically from
+              <a href="https://orcid.org/0000-0002-8562-8790">
+                ORCID
+              </a>.
+            </div>
+
+          </main>
+
+          <footer>
+            © Rajapandian Kanagaraj
+          </footer>
+
+          </body>
+          </html>
+          """
+
+          Path("publications.html").write_text(
+              html,
+              encoding="utf-8"
+          )
+
+          print("Generated publications.html")
+          PY
+
+      - name: Commit updated publications page
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add publications.html
+
+          if git diff --cached --quiet; then
+            echo "No publication changes."
+          else
+            git commit -m "Update publications from ORCID"
+            git push
+          fi
