@@ -174,9 +174,8 @@ jobs:
               # articles and other research outputs that ORCID has
               # placed in the works section.
               contributors = []
-
-              contributor_data = work.get("contributors", {})
-              contributor_list = contributor_data.get("contributor", [])
+              contributor_data = work.get("contributors") or {}
+              contributor_list = contributor_data.get("contributor") or []
 
               for contributor in contributor_list:
                   credit_name = (
