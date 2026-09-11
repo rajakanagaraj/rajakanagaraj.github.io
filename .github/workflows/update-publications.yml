@@ -188,17 +188,17 @@ jobs:
                   if not isinstance(contributor, dict):
                       continue
 
-          credit_name_data = contributor.get("credit-name")
+                  credit_name_data = contributor.get("credit-name")
 
-          if not isinstance(credit_name_data, dict):
-              continue
+                  if not isinstance(credit_name_data, dict):
+                      continue
 
-          credit_name = credit_name_data.get("value")
+                  credit_name = credit_name_data.get("value")
 
-          if not credit_name:
-              continue
+                  if not credit_name:
+                      continue
 
-          contributors.append(credit_name)
+                  contributors.append(credit_name)
 
               # Find DOI
               doi = None
