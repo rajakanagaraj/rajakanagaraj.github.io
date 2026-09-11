@@ -176,75 +176,75 @@ jobs:
               # We are building a publications page, so keep journal
               # articles and other research outputs that ORCID has
               # placed in the works section.
-          contributors = []
-
-          contributor_data = work.get("contributors")
-
-          if isinstance(contributor_data, dict):
-              contributor_list = contributor_data.get("contributor") or []
-          else:
-              contributor_list = []
-
-          if isinstance(contributor_list, list):
-              for contributor in contributor_list:
-
-                  if not isinstance(contributor, dict):
-                      continue
-
-                  credit_name_data = contributor.get("credit-name")
-
-                  if not isinstance(credit_name_data, dict):
-                      continue
-
-                  credit_name = credit_name_data.get("value")
-
-                  if not credit_name:
-                      continue
-
-                  contributors.append(credit_name)
-
-              # Find DOI
-              # Find DOI
-              doi = None
-
-              external_ids_data = work.get("external-ids") or {}
-
-              if isinstance(external_ids_data, dict):
-                  external_ids = external_ids_data.get("external-id") or []
+              contributors = []
+    
+              contributor_data = work.get("contributors")
+    
+              if isinstance(contributor_data, dict):
+                  contributor_list = contributor_data.get("contributor") or []
               else:
-                  external_ids = []
-
-              if isinstance(external_ids, list):
-                  for external_id in external_ids:
-                      if not isinstance(external_id, dict):
+                  contributor_list = []
+    
+              if isinstance(contributor_list, list):
+                  for contributor in contributor_list:
+    
+                      if not isinstance(contributor, dict):
                           continue
-
-                      external_id_type = external_id.get("external-id-type") or ""
-
-                      if external_id_type.lower() == "doi":
-                          doi = external_id.get("external-id-value")
-                          break
-
-              work_url = None
-
-              url_data = work.get("url")
-              if isinstance(url_data, dict):
-                  work_url = url_data.get("value")
-
-              if doi:
-                  doi_url = f"https://doi.org/{doi}"
-              else:
-                  doi_url = work_url
-
-              publications.append({
-                  "year": int(year),
-                  "title": title,
-                  "journal": journal,
-                  "authors": contributors,
-                  "doi": doi,
-                  "url": doi_url,
-                  "type": work_type
-              })
+    
+                      credit_name_data = contributor.get("credit-name")
+    
+                      if not isinstance(credit_name_data, dict):
+                          continue
+    
+                      credit_name = credit_name_data.get("value")
+    
+                      if not credit_name:
+                          continue
+    
+                      contributors.append(credit_name)
+    
+                  # Find DOI
+                  # Find DOI
+                  doi = None
+    
+                  external_ids_data = work.get("external-ids") or {}
+    
+                  if isinstance(external_ids_data, dict):
+                      external_ids = external_ids_data.get("external-id") or []
+                  else:
+                      external_ids = []
+    
+                  if isinstance(external_ids, list):
+                      for external_id in external_ids:
+                          if not isinstance(external_id, dict):
+                              continue
+    
+                          external_id_type = external_id.get("external-id-type") or ""
+    
+                          if external_id_type.lower() == "doi":
+                              doi = external_id.get("external-id-value")
+                              break
+    
+                  work_url = None
+    
+                  url_data = work.get("url")
+                  if isinstance(url_data, dict):
+                      work_url = url_data.get("value")
+    
+                  if doi:
+                      doi_url = f"https://doi.org/{doi}"
+                  else:
+                      doi_url = work_url
+    
+                  publications.append({
+                      "year": int(year),
+                      "title": title,
+                      "journal": journal,
+                      "authors": contributors,
+                      "doi": doi,
+                      "url": doi_url,
+                      "type": work_type
+                  })
 
           # ------------------------------------------------------------
           # Sort newest first
