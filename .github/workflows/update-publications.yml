@@ -173,21 +173,32 @@ jobs:
               # We are building a publications page, so keep journal
               # articles and other research outputs that ORCID has
               # placed in the works section.
-              contributors = []
-              contributor_data = work.get("contributors") or {}
+          contributors = []
+
+          contributor_data = work.get("contributors")
+
+          if isinstance(contributor_data, dict):
               contributor_list = contributor_data.get("contributor") or []
+          else:
+              contributor_list = []
 
+          if isinstance(contributor_list, list):
               for contributor in contributor_list:
-                  credit_name = (
-                      contributor
-                      .get("credit-name", {})
-                      .get("value")
-                  )
 
-                  if not credit_name:
+                  if not isinstance(contributor, dict):
                       continue
 
-                  contributors.append(credit_name)
+          credit_name_data = contributor.get("credit-name")
+
+          if not isinstance(credit_name_data, dict):
+              continue
+
+          credit_name = credit_name_data.get("value")
+
+          if not credit_name:
+              continue
+
+          contributors.append(credit_name)
 
               # Find DOI
               doi = None
