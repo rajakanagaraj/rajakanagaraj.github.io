@@ -123,6 +123,22 @@
                 margin: 0 7px;
             }
         }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        
     </style>
 </head>
 
@@ -137,13 +153,19 @@
 
 <div class="container">
 
-    <h1>Rajapandian Kanagaraj, Ph.D.</h1>
+    <div class="profile-header">
+        <img src="profile_photo_cv.jpg"
+             alt="Rajapandian Kanagaraj"
+             class="profile-photo">
 
-    <div class="subtitle">
-        Quantitative Ecologist
+        <div>
+            <h1>Rajapandian Kanagaraj, Ph.D.</h1>
+
+            <div class="subtitle">
+                Quantitative Ecologist
+            </div>
+        </div>
     </div>
-
-    <h2>Education</h2>
 
     <div class="item">
         <h3>Ph.D. in Wildlife Science</h3>
