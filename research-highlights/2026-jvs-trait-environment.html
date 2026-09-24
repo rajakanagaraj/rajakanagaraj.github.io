@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trait Environment Relationships in a Tropical Forest | Rajapandian Kanagaraj</title>
+
+    <meta name="description"
+          content="An analytical reanalysis of trait environment relationships in a tropical forest, showing how spatial structure and species turnover change the apparent environmental signal.">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            background: #ffffff;
+            line-height: 1.7;
+        }
+
+        header {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 22px 8%;
+            background: #ffffff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        nav .name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #222;
+        }
+
+        nav .links a {
+            margin-left: 24px;
+            text-decoration: none;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        nav .links a:hover {
+            color: #000;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 70px 8%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.25;
+            margin-bottom: 18px;
+            color: #222;
+        }
+
+        h2 {
+            font-size: 1.65rem;
+            margin-top: 60px;
+            margin-bottom: 18px;
+            color: #222;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 35px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        .meta {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 45px;
+        }
+
+        .key-result {
+            border-left: 3px solid #555;
+            padding: 18px 24px;
+            margin: 40px 0 50px 0;
+        }
+
+        .key-result-number {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 5px;
+        }
+
+        .key-result-text {
+            color: #555;
+        }
+
+        .figure {
+            margin: 35px 0 50px 0;
+        }
+
+        .figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 12px;
+        }
+
+        .paper {
+            border-left: 3px solid #555;
+            padding-left: 22px;
+            margin-top: 30px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #444;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 1px solid #999;
+        }
+
+        .back-link:hover {
+            color: #000;
+            border-bottom-color: #000;
+        }
+
+        footer {
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            padding: 30px 8%;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .links {
+                margin-top: 12px;
+            }
+
+            nav .links a {
+                margin-left: 0;
+                margin-right: 18px;
+            }
+
+            main {
+                padding-top: 45px;
+            }
+
+            h1 {
+                font-size: 2.1rem;
+            }
+
+            .key-result-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="name">Rajapandian Kanagaraj</div>
+
+        <div class="links">
+            <a href="../index.html">Home</a>
+            <a href="../research.html">Research</a>
+            <a href="../research-highlights.html">Research Highlights</a>
+            <a href="../publications.html">Publications</a>
+            <a href="../cv.html">CV</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <h1>
+        What environmental signals in a tropical forest's functional
+        composition survive scrutiny?
+    </h1>
+
+    <p class="intro">
+        An analytical reanalysis of trait environment relationships showing
+        how spatial structure and species turnover change the apparent
+        environmental signal.
+    </p>
+
+    <div class="meta">
+        Journal of Vegetation Science · 2026 · Mo Singto forest dynamics plot,
+        Thailand
+    </div>
+
+
+    <p>
+        In a recent paper in the <i>Journal of Vegetation Science</i> (2026),
+        my co authors and I asked how environmental gradients (topography,
+        soil nutrients and canopy structure) relate to the functional
+        composition of plants on the 30 ha Mo Singto forest dynamics plot
+        in Thailand.
+    </p>
+
+    <p>
+        Using around 135,000 woody plants and eight field measured functional
+        traits, from which eight community weighted mean (CWM) and six
+        functional dispersion (FDis) attributes were derived, we used a
+        spatially explicit Bayesian (INLA SPDE) framework to investigate
+        trait environment relationships.
+    </p>
+
+    <p>
+        We initially considered 24 environmental variables, but removed
+        10 highly correlated variables based on variance inflation factors,
+        leaving 14 environmental variables for the subsequent analyses.
+    </p>
+
+    <p>
+        We found that topographic water availability, represented by the
+        topographic wetness index (TWI), was the dominant environmental
+        gradient associated with community functional patterns, aligning
+        functional composition along the acquisitive to conservative
+        resource use trade off.
+    </p>
+
+
+    <div class="key-result">
+
+        <div class="key-result-number">
+            98 → 35 → 1
+        </div>
+
+        <div class="key-result-text">
+            Significant trait environment associations progressively
+            disappeared as spatial structure and species turnover were
+            taken into account.
+        </div>
+
+    </div>
+
+
+    <h2>
+        Three stages of scrutiny
+    </h2>
+
+    <p>
+        The figures below are an analytical synthesis I created for this page
+        by reanalysing the paper's own models. Every trait environment
+        association is tracked through three stages of scrutiny: a non spatial
+        model, the same model with an explicit spatial random field, and
+        finally a species turnover null model that asks whether the association
+        can be explained by environmentally structured species turnover,
+        rather than requiring an additional trait environment association
+        beyond species compositional change.
+    </p>
+
+
+    <h3>Stage 1: The apparent environmental signal</h3>
+
+    <p>
+        When space is ignored, 98 of 196 possible trait environment
+        associations appear significant. This provides a broad picture of
+        environmental relationships in community functional composition,
+        but does not distinguish environmental effects from spatially
+        structured variation.
+    </p>
+
+
+    <h3>Stage 2: Accounting for spatial structure</h3>
+
+    <p>
+        Once an explicit spatial random field is included, the number of
+        significant associations falls to 35. This shows that much of the
+        apparent environmental signal is associated with spatial structure
+        that is not captured by the non spatial models.
+    </p>
+
+
+    <h3>Stage 3: Accounting for species turnover</h3>
+
+    <p>
+        The remaining community weighted mean relationships were then
+        examined using a species turnover null model. This asks whether
+        observed trait environment associations are consistent with
+        environmentally structured species turnover. Most of the remaining
+        relationships were consistent with this expectation, while tree
+        height showed evidence of an additional trait environment association
+        beyond species compositional change.
+    </p>
+
+
+    <h2>
+        Evidence decomposition
+    </h2>
+
+    <div class="figure">
+
+        <img src="../images/jvs_evidence_decomposition.png"
+             alt="Evidence decomposition of trait environment associations across non spatial, spatial and species turnover analyses.">
+
+        <p class="caption">
+            Figure 1. Evidence decomposition of trait environment
+            associations. The first two panels show the 14 functional
+            attributes, eight CWM and six FDis attributes derived from eight
+            field measured traits, against the 14 environmental variables
+            retained after multicollinearity screening. The third panel shows
+            the species turnover null model. The starred tree height and TWI
+            association is the only association that shows evidence beyond
+            the species turnover expectation.
+        </p>
+
+    </div>
+
+
+    <h2>
+        How much environmental evidence survives?
+    </h2>
+
+    <div class="figure">
+
+        <img src="../images/jvs_evidence_counts.png"
+             alt="Number of significant trait environment associations across three stages of analysis, showing 98, 35 and 1.">
+
+        <p class="caption">
+            Figure 2. How much environmental evidence survives each analysis
+            stage? Ninety eight of 196 possible associations are significant
+            in the non spatial models, while 35 remain significant after
+            explicit modelling of spatial structure. The subsequent species
+            turnover null model shows that most of the remaining community
+            weighted mean relationships are consistent with environmentally
+            structured species turnover, with tree height showing evidence of
+            an additional trait environment association beyond species
+            compositional change.
+        </p>
+
+    </div>
+
+
+    <h2>
+        What does this tell us?
+    </h2>
+
+    <p>
+        Small scale functional composition in this old growth forest is
+        therefore largely a story of species replacement along environmental
+        gradients, rather than direct trait environment filtering.
+    </p>
+
+    <p>
+        The analysis highlights why environmental relationships in spatially
+        structured ecological communities can be difficult to interpret.
+        Apparent trait environment relationships can arise from spatial
+        structure and from environmentally structured changes in species
+        composition. Accounting for these processes changes the interpretation
+        of the ecological signal.
+    </p>
+
+
+    <h2>
+        Paper
+    </h2>
+
+    <div class="paper">
+
+        <p>
+            Kanagaraj, R., Brockelman, W.Y., Wiegand, T., Nathalang, A.,
+            Yang, J., Tripathi, N.K. &amp; Chanthorn, W. (2026).
+            <i>Spatial regulation of trait environment interactions shapes
+            plant community functional patterns in a tropical forest.</i>
+            <i>Journal of Vegetation Science</i> 37: e70169.
+            doi:10.1111/jvs.70169
+        </p>
+
+        <p>
+            <a href="https://doi.org/10.1111/jvs.70169">
+                View the paper
+            </a>
+        </p>
+
+    </div>
+
+
+    <h2>
+        Reanalysis note
+    </h2>
+
+    <p>
+        The counts shown here were computed by reanalysis of the paper's saved
+        posterior model summaries and null model tables. They are expressed
+        as totals across all trait environment pairs. The complete evidence
+        table behind both figures is available in the paper, and the data
+        and code are archived on Figshare.
+    </p>
+
+
+    <a class="back-link" href="../research-highlights.html">
+        ← Back to Research Highlights
+    </a>
+
+</main>
+
+<footer>
+    © 2026 Rajapandian Kanagaraj
+</footer>
+
+</body>
+</html>
