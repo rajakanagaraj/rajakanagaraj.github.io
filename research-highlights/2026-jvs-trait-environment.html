@@ -112,7 +112,11 @@
         .figure {
             margin: 35px 0 50px 0;
         }
-
+        
+        .figure-wide {
+            margin: 35px -150px 50px -150px;
+        }
+        
         .figure img {
             width: 100%;
             height: auto;
@@ -154,6 +158,11 @@
         }
 
         @media (max-width: 700px) {
+            .figure-wide {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
             nav {
                 flex-direction: column;
                 align-items: flex-start;
@@ -318,7 +327,7 @@
         Evidence decomposition
     </h2>
 
-    <div class="figure">
+    <div class="figure-wide">
 
         <img src="../images/jvs_evidence_decomposition.png"
              alt="Evidence decomposition of trait environment associations across non spatial, spatial and species turnover analyses.">
