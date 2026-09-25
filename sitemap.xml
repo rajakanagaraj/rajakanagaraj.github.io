@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://rajakanagaraj.github.io/</loc>
   </url>
@@ -9,10 +10,19 @@
   </url>
 
   <url>
+    <loc>https://rajakanagaraj.github.io/research-highlights.html</loc>
+  </url>
+
+  <url>
+    <loc>https://rajakanagaraj.github.io/research-highlights/2026-jvs-trait-environment.html</loc>
+  </url>
+
+  <url>
     <loc>https://rajakanagaraj.github.io/publications.html</loc>
   </url>
 
   <url>
     <loc>https://rajakanagaraj.github.io/cv.html</loc>
   </url>
+
 </urlset>
