@@ -182,6 +182,39 @@
             }
         }
     </style>
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        
+        .lightbox img {
+            max-width: 95%;
+            max-height: 95%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: normal;
+            cursor: pointer;
+            line-height: 1;
+        }
 </head>
 
 <body>
@@ -321,10 +354,10 @@
 
     <div class="figure">
 
-        <a href="../images/jvs_evidence_decomposition.png" target="_blank">
-            <img src="../images/jvs_evidence_decomposition.png"
-                 alt="Evidence decomposition of trait environment associations across non spatial, spatial and species turnover analyses.">
-        </a>
+        <img src="../images/jvs_evidence_decomposition.png"
+             alt="Evidence decomposition of trait environment associations across non spatial, spatial and species turnover analyses."
+             class="lightbox-image"
+             onclick="openLightbox(this.src)">
 
         <p class="caption">
             Figure 1. Evidence decomposition of trait-environment
@@ -431,5 +464,21 @@
     © 2026 Rajapandian Kanagaraj
 </footer>
 
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-image" src="" alt="">
+</div>
+
+<script>
+    function openLightbox(src) {
+        document.getElementById("lightbox-image").src = src;
+        document.getElementById("lightbox").style.display = "flex";
+    }
+
+    function closeLightbox() {
+        document.getElementById("lightbox").style.display = "none";
+    }
+</script>
+    
 </body>
 </html>
