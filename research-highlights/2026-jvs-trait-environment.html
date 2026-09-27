@@ -7,7 +7,7 @@
     <title>Trait Environment Relationships in a Tropical Forest | Rajapandian Kanagaraj</title>
 
     <meta name="description"
-          content="A reanalysis of trait environment relationships in a tropical forest, showing how spatial structure and species turnover change the apparent environmental signal.">
+          content="A reanalysis of trait environment relationships in a tropical forest, showing how spatial structure and species turnover change the interpretation of environmental associations.">
 
     <style>
         body {
@@ -111,8 +111,8 @@
 
         .figure {
             margin: 35px 0 50px 0;
-        }        
-     
+        }
+
         .figure img {
             width: 100%;
             height: auto;
@@ -154,7 +154,6 @@
         }
 
         @media (max-width: 700px) {
-            
             nav {
                 flex-direction: column;
                 align-items: flex-start;
@@ -196,7 +195,7 @@
             padding: 30px;
             box-sizing: border-box;
         }
-        
+
         .lightbox img {
             max-width: 95%;
             max-height: 95%;
@@ -204,7 +203,7 @@
             height: auto;
             object-fit: contain;
         }
-        
+
         .lightbox-close {
             position: absolute;
             top: 20px;
@@ -214,9 +213,11 @@
             font-weight: normal;
             cursor: pointer;
             line-height: 1;
+            background: none;
+            border: none;
+            padding: 0;
         }
     </style>
-
 </head>
 
 <body>
@@ -253,7 +254,6 @@
         Thailand
     </div>
 
-
     <p>
         In a recent paper in the <i>Journal of Vegetation Science</i> (2026),
         my coauthors and I asked how environmental gradients (topography,
@@ -264,10 +264,10 @@
 
     <p>
         Using around 135,000 woody plants and eight field measured functional
-        traits, from which eight community-weighted mean (CWM) and six
+        traits, from which eight community weighted mean (CWM) and six
         functional dispersion (FDis) attributes were derived, we used a
-        spatially explicit Bayesian (INLA-SPDE) framework to investigate
-        trait-environment relationships.
+        spatially explicit Bayesian (INLA SPDE) framework to investigate
+        trait environment relationships.
     </p>
 
     <p>
@@ -284,71 +284,78 @@
         resource use trade off.
     </p>
 
-
     <div class="key-result">
 
         <div class="key-result-number">
-            98 → 35 → 1
+            98 of 196
         </div>
 
         <div class="key-result-text">
-            Significant trait environment associations progressively
-            disappeared as spatial structure and species turnover were
-            taken into account.
+            Significant trait environment relationships in non spatial models.
+        </div>
+
+        <div class="key-result-number" style="margin-top: 18px;">
+            35 of 196
+        </div>
+
+        <div class="key-result-text">
+            Significant relationships after accounting for spatial structure.
+        </div>
+
+        <div class="key-result-text" style="margin-top: 18px;">
+            <strong>Separate follow up analysis:</strong> The species turnover
+            null model was applied to a restricted set of community weighted
+            mean relationships. The tree height and TWI association was the
+            only one showing evidence beyond the species turnover expectation.
         </div>
 
     </div>
 
-
     <h2>
-        Three stages of scrutiny
+        Three stages of analysis
     </h2>
 
     <p>
         The figures below are an analytical synthesis I created for this page
-        by reanalysing the paper's own models. Every trait environment
-        association is tracked through three stages of scrutiny: a non spatial
-        model, the same model with an explicit spatial random field, and
-        finally a species turnover null model that asks whether the association
-        can be explained by environmentally structured species turnover,
-        rather than requiring an additional trait environment association
-        beyond species compositional change.
+        by reanalysing the paper's models and null model results. The first
+        comparison tracks the same 196 trait environment relationships in
+        non spatial models and models with an explicit spatial random field.
+        A separate species turnover null model was then used to examine a
+        restricted set of community weighted mean relationships, asking
+        whether their observed associations were consistent with
+        environmentally structured species turnover or showed evidence
+        beyond that expectation.
     </p>
-
 
     <h3>Stage 1: The apparent environmental signal</h3>
 
     <p>
         When space is ignored, 98 of 196 possible trait environment
-        associations appear significant. This provides a broad picture of
+        relationships appear significant. This provides a broad picture of
         environmental relationships in community functional composition,
         but does not distinguish environmental effects from spatially
         structured variation.
     </p>
 
-
     <h3>Stage 2: Accounting for spatial structure</h3>
 
     <p>
-        Once an explicit spatial random field is included, the number of
-        significant associations falls to 35. This shows that much of the
+        Once an explicit spatial random field is included, 35 of the same
+        196 relationships remain significant. This shows that much of the
         apparent environmental signal is associated with spatial structure
         that is not captured by the non spatial models.
     </p>
 
-
-    <h3>Stage 3: Accounting for species turnover</h3>
+    <h3>Separate follow up: Species turnover null model</h3>
 
     <p>
-        The remaining community-weighted mean relationships were then
-        examined using a species turnover null model. This asks whether
-        observed trait environment associations are consistent with
-        environmentally structured species turnover. Most of the remaining
-        relationships were consistent with this expectation, while tree
-        height showed evidence of an additional trait environment association
-        beyond species compositional change.
+        The species turnover null model was applied to community weighted
+        mean relationships for the environmental variables retained in the
+        spatial models. It asks whether the observed trait environment
+        relationships are consistent with environmentally structured
+        species turnover. The tree height and TWI association was the only
+        one showing evidence beyond the species turnover expectation.
     </p>
-
 
     <h2>
         Evidence decomposition
@@ -357,23 +364,24 @@
     <div class="figure">
 
         <img src="../images/jvs_evidence_decomposition.png"
-             alt="Evidence decomposition of trait environment associations across non spatial, spatial and species turnover analyses."
+             alt="Evidence decomposition of trait environment relationships across non spatial, spatial and species turnover analyses."
              class="lightbox-image"
              onclick="openLightbox(this.src)">
 
         <p class="caption">
-            Figure 1. Evidence decomposition of trait-environment
-            associations. The first two panels show the 14 functional
-            attributes, eight CWM and six FDis attributes derived from eight
-            field measured traits, against the 14 environmental variables
-            retained after multicollinearity screening. The third panel shows
-            the species turnover null model. The starred tree height and TWI
-            association is the only association that shows evidence beyond
-            the species turnover expectation.
+            Figure 1. Evidence decomposition of trait environment relationships.
+            The first two panels show the 14 functional attributes, eight CWM
+            and six FDis attributes derived from eight field measured traits,
+            against the 14 environmental variables retained after
+            multicollinearity screening. These panels compare the same
+            relationships before and after accounting for spatial structure.
+            The third panel presents the separate species turnover null model,
+            applied to a restricted set of CWM relationships. The tree height
+            and TWI association is the only one showing evidence beyond the
+            species turnover expectation.
         </p>
 
     </div>
-
 
     <h2>
         How much environmental evidence survives?
@@ -382,22 +390,23 @@
     <div class="figure">
 
         <img src="../images/jvs_evidence_counts.png"
-             alt="Number of significant trait environment associations across three stages of analysis, showing 98, 35 and 1.">
+             alt="Summary of significant trait environment relationships across non spatial and spatial models, with a separate species turnover null model result.">
 
         <p class="caption">
-            Figure 2. How much environmental evidence survives each analysis
-            stage? Ninety eight of 196 possible associations are significant
-            in the non spatial models, while 35 remain significant after
-            explicit modelling of spatial structure. The subsequent species
-            turnover null model shows that most of the remaining community
-            weighted mean relationships are consistent with environmentally
-            structured species turnover, with tree height showing evidence of
-            an additional trait environment association beyond species
-            compositional change.
+            Figure 2. Comparison of significant trait environment relationships
+            in non spatial and spatial models, alongside a separate species
+            turnover null model analysis. The first two results are directly
+            comparable: 98 of the same 196 possible relationships were
+            significant in non spatial models, compared with 35 after accounting
+            for spatial structure. The species turnover null model was conducted
+            separately on a restricted set of community weighted mean
+            relationships. It found that the tree height and TWI association
+            was the only one showing evidence beyond the species turnover
+            expectation. The third result is therefore not a further reduction
+            from 35 relationships, but a distinct follow up analysis.
         </p>
 
     </div>
-
 
     <h2>
         What does this tell us?
@@ -417,7 +426,6 @@
         composition. Accounting for these processes changes the interpretation
         of the ecological signal.
     </p>
-
 
     <h2>
         Paper
@@ -442,19 +450,19 @@
 
     </div>
 
-
     <h2>
         Reanalysis note
     </h2>
 
     <p>
-        The counts shown here were computed by reanalysis of the paper's saved
-        posterior model summaries and null model tables. They are expressed
-        as totals across all trait environment pairs. The complete evidence
-        table behind both figures is available in the paper, and the data
-        and code are archived on Figshare.
+        The counts for the non spatial and spatial models were computed
+        by reanalysis of the paper's saved posterior model summaries and
+        represent totals across the same 196 trait environment relationships.
+        The species turnover null model was analysed separately for a
+        restricted set of community weighted mean relationships. The
+        complete evidence table and analysis materials are available
+        through the paper and its Figshare archive.
     </p>
-
 
     <a class="back-link" href="../research-highlights.html">
         ← Back to Research Highlights
@@ -466,8 +474,12 @@
     © 2026 Rajapandian Kanagaraj
 </footer>
 
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">&times;</span>
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close"
+            type="button"
+            aria-label="Close image"
+            onclick="closeLightbox(event)">&times;</button>
+
     <img id="lightbox-image" src="" alt="">
 </div>
 
@@ -477,10 +489,19 @@
         document.getElementById("lightbox").style.display = "flex";
     }
 
-    function closeLightbox() {
-        document.getElementById("lightbox").style.display = "none";
+    function closeLightbox(event) {
+        if (!event || event.target.id === "lightbox" ||
+            event.target.classList.contains("lightbox-close")) {
+            document.getElementById("lightbox").style.display = "none";
+        }
     }
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            document.getElementById("lightbox").style.display = "none";
+        }
+    });
 </script>
-    
+
 </body>
 </html>
