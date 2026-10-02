@@ -184,7 +184,7 @@ jobs:
               if isinstance(journal_data, dict):
                   journal = journal_data.get("value") or ""
               else:
-              journal = ""
+                journal = ""
 
               work_type = work.get("type", "")
 
