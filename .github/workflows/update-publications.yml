@@ -136,7 +136,10 @@ jobs:
                   print(f"Could not retrieve work {put_code}: {error}")
                   continue
 
-              works.append(detail)
+              if isinstance(detail, dict):
+                works.append(detail)
+              else:
+                print(f"Skipping work {put_code}: ORCID returned no valid work record")
 
           # ------------------------------------------------------------
           # Extract publication information
@@ -146,6 +149,8 @@ jobs:
 
           for work in works:
 
+              if not isinstance(work, dict):
+                  continue
               # Extract title safely, including when ORCID returns null fields
               title_data = work.get("title")
               if not isinstance(title_data, dict):
