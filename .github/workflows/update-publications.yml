@@ -146,30 +146,40 @@ jobs:
 
           for work in works:
 
-              title = (
-                  work.get("title", {})
-                      .get("title", {})
-                      .get("value", "")
-              )
-
+              # Extract title safely, including when ORCID returns null fields
+              title_data = work.get("title")
+              if not isinstance(title_data, dict):
+                  continue
+      
+              title_object = title_data.get("title")
+              if not isinstance(title_object, dict):
+                  continue
+      
+              title = title_object.get("value") or ""
+      
               if not title:
                   continue
-
-              publication_date = work.get("publication-date") or {}
-
-              year = (
-                  publication_date
-                  .get("year", {})
-                  .get("value")
-              )
-
+      
+              # Extract publication year safely
+              publication_date = work.get("publication-date")
+              if not isinstance(publication_date, dict):
+                  publication_date = {}
+      
+              year_data = publication_date.get("year")
+              if not isinstance(year_data, dict):
+                  year_data = {}
+      
+              year = year_data.get("value")
+      
               if not year:
                   continue
-
-              journal = (
-                  work.get("journal-title", {})
-                      .get("value", "")
-              )
+      
+              # Extract journal title safely
+              journal_data = work.get("journal-title")
+              if isinstance(journal_data, dict):
+                  journal = journal_data.get("value") or ""
+              else:
+              journal = ""
 
               work_type = work.get("type", "")
 
